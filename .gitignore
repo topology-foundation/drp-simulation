@@ -1,5 +1,6 @@
 .env
 node_modules/
-shadow.data
+shadow.data/
 shadow.yaml
 *.gml
+*.log
