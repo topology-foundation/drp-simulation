@@ -11,6 +11,12 @@
 To benchmark message propagation, navigate to [message_propagation/](/message_propagation). First, generate `shadow.yaml` using `gen_config.py`.
 
 ```bash
+cd message_propagation
+pip install -r requirements.txt
+./gen_config.py
+```
+
+```bash
 usage: gen_config [-h] [-n NODES] [-b BOOTSTRAPS] [-f FILE]
 
 Generate shadow.yaml
