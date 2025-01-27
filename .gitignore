@@ -1,0 +1,5 @@
+.env
+node_modules/
+shadow.data
+shadow.yaml
+*.gml
