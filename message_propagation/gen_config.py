@@ -39,30 +39,32 @@ parser.add_argument(
 )
 parser.add_argument(
     "--bootstrap-end-time",
-    help="Bootstrap end time {amount}s/m/h",
+    help="Bootstrap end time {amount}s/min/h",
     type=str,
     default="10s",
 )
 parser.add_argument(
     "--heartbeat",
-    help="Heartbeat interval {amount}s/m/h",
+    help="Heartbeat interval {amount}s/min/h",
     type=str,
     default="10s",
 )
 parser.add_argument(
     "--duration",
-    help="Duration of the simulation {amount}s/m/h",
+    help="Duration of the simulation {amount}s/min/h",
     type=str,
-    default="1m",
+    default="1min",
 )
 args = parser.parse_args()
 
 # validate the time args
 assert re.match(
-    r"^\d+[smh]$", args.bootstrap_end_time
+    r"^\d+(s|min|h)$", args.bootstrap_end_time
 ), "Bootstrap end time must follow format"
-assert re.match(r"^\d+[smh]$", args.heartbeat), "Heartbeat interval must follow format"
-assert re.match(r"^\d+[smh]$", args.duration), "Duration must follow format"
+assert re.match(
+    r"^\d+(s|min|h)$", args.heartbeat
+), "Heartbeat interval must follow format"
+assert re.match(r"^\d+(s|min|h)$", args.duration), "Duration must follow format"
 
 DIRNAME = os.path.dirname(os.path.abspath(__file__))
 
