@@ -17,40 +17,50 @@ assert len(REGIONS) == 8
 assert len(DEFAULT_BUILTIN_RELIABILITIES) == 5
 
 
-def node_info(bootstraps: int, node_id: int):
+def node_info(bootstraps: int, node_id: int, same_region=False, all_reliable=False):
     """Function to determine the attributes of a node"""
     if node_id < bootstraps:
         return (
             f"bootstrap{node_id + 1}",
-            REGIONS[node_id % 8],
+            REGIONS[node_id % 8] if not same_region else REGIONS[2],
             "reliable",
             DEFAULT_BUILTIN_RELIABILITIES["reliable"],
             f"11.{node_id % 8}.0.{node_id // 8}",
         )
     return (
         f"node{node_id - bootstraps + 1}",
-        REGIONS[(node_id - bootstraps) % 8],
-        name := RELIABILITIES[(node_id - bootstraps) % 5],
+        REGIONS[(node_id - bootstraps) % 8] if not same_region else REGIONS[2],
+        name := (
+            RELIABILITIES[(node_id - bootstraps) % 5]
+            if not all_reliable
+            else "reliable"
+        ),
         DEFAULT_BUILTIN_RELIABILITIES[name],
         f"12.{(node_id - bootstraps) % 8}.{(node_id - bootstraps) % 5}.{(node_id - bootstraps) // 8}",
     )
 
 
-def generate_topology(bootstraps: int, nodes: int) -> list[str]:
+def generate_topology(
+    bootstraps: int, nodes: int, same_region=False, all_reliable=False
+) -> list[str]:
     """Function to create the network topology"""
     G = nx.DiGraph()
     ips = []
 
     # start with bootstraps, all are reliable
     for i in range(bootstraps + nodes):
-        node_name, region, rel_name, reliability, ip_addr = node_info(bootstraps, i)
+        node_name, region, rel_name, reliability, ip_addr = node_info(
+            bootstraps, i, same_region, all_reliable
+        )
         ips.append(ip_addr)
         G.add_node(i, label=f"{node_name} ({region}-{rel_name})")
         G.nodes[i]["hostbandwidthup"] = reliability["bandwidth_up"]
         G.nodes[i]["hostbandwidthdown"] = reliability["bandwidth_down"]
 
         for j in range(bootstraps + nodes):
-            _, region_to, rel_to_name, reliability_to, _ = node_info(bootstraps, j)
+            _, region_to, rel_to_name, reliability_to, _ = node_info(
+                bootstraps, j, same_region, all_reliable
+            )
 
             G.add_edge(i, j)
             G.edges[i, j]["latency"] = (

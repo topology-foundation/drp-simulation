@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import os
+import re
 import argparse
 from gen_topology import generate_topology
 
@@ -26,20 +27,57 @@ parser.add_argument(
     type=str,
     default="shadow.yaml",
 )
-
+parser.add_argument(
+    "--same-region",
+    help="Put all nodes in the same region",
+    action="store_true",
+)
+parser.add_argument(
+    "--all-reliable",
+    help="Make all nodes reliable",
+    action="store_true",
+)
+parser.add_argument(
+    "--bootstrap-end-time",
+    help="Bootstrap end time {amount}s/m/h",
+    type=str,
+    default="10s",
+)
+parser.add_argument(
+    "--heartbeat",
+    help="Heartbeat interval {amount}s/m/h",
+    type=str,
+    default="10s",
+)
+parser.add_argument(
+    "--duration",
+    help="Duration of the simulation {amount}s/m/h",
+    type=str,
+    default="1m",
+)
 args = parser.parse_args()
+
+# validate the time args
+assert re.match(
+    r"^\d+[smh]$", args.bootstrap_end_time
+), "Bootstrap end time must follow format"
+assert re.match(r"^\d+[smh]$", args.heartbeat), "Heartbeat interval must follow format"
+assert re.match(r"^\d+[smh]$", args.duration), "Duration must follow format"
 
 DIRNAME = os.path.dirname(os.path.abspath(__file__))
 
-ip_addrs = generate_topology(args.bootstraps, args.nodes)
+ip_addrs = generate_topology(
+    args.bootstraps, args.nodes, args.same_region, args.all_reliable
+)
+
 assert os.path.exists("network_topology.gml")
 
 with open(args.file, "w", encoding="utf8") as f:
     f.write(
-        """general:
-  bootstrap_end_time: 10s
-  heartbeat_interval: 10s
-  stop_time: 1min
+        f"""general:
+  bootstrap_end_time: {args.bootstrap_end_time}
+  heartbeat_interval: {args.heartbeat}
+  stop_time: {args.duration}
   progress: true
   model_unblocked_syscall_latency: true
 network:
