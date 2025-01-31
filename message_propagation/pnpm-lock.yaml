@@ -9,11 +9,11 @@ importers:
   .:
     dependencies:
       '@ts-drp/network':
-        specifier: ^0.6.1
-        version: 0.6.1(react-native@0.77.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(react@18.3.1))
+        specifier: ^0.7.0
+        version: 0.7.0(react-native@0.77.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(react@18.3.1))
       '@ts-drp/node':
-        specifier: ^0.6.1
-        version: 0.6.1(react-native@0.77.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(react@18.3.1))
+        specifier: ^0.7.0
+        version: 0.7.0(react-native@0.77.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(react@18.3.1))
       commander:
         specifier: ^13.1.0
         version: 13.1.0
@@ -1015,20 +1015,20 @@ packages:
     resolution: {integrity: sha512-htm89iUpvlb+rQfv1YU6n7p9IUHIh/nOVLKDeS0r++zAUl1fjWg3lrIBjIIEpnZAGXjpAVXD7v5QxZtP8l1qqg==}
     engines: {node: '>=18'}
 
-  '@ts-drp/blueprints@0.6.1':
-    resolution: {integrity: sha512-HAEPSS5Cd9kU0Osc5ZAVpgcd4ItnS0yYcKTJS3wNOOVSQwjro3CqqMujOVKpgG4HloIjDj83RvkOqla6hS3Tyw==}
+  '@ts-drp/blueprints@0.7.0':
+    resolution: {integrity: sha512-KiZZhoo4FS5SNsINgk7y3Aq0vpZCQmtgXHysH7+rrsWQW2YTJ59FrdCyY7Ic+x94MEqc+2fdWET2EoXH0ffquA==}
 
-  '@ts-drp/logger@0.6.1':
-    resolution: {integrity: sha512-J8Ud1ThNrT24JWOsud1TkC7lHRRDweqKCRua98Po7K1S5CZRpeK2QtNAflh7LnQuczJAsJgQzl/kiYZHj8nO1w==}
+  '@ts-drp/logger@0.7.0':
+    resolution: {integrity: sha512-BefOPK/ZE4A26lawQk3zbUcMnzp3CKWpSMwtZ83H1TK+bFxyrRB0Ga/eoI57FcQT496hsoj8R8eg9CluBmXNPA==}
 
-  '@ts-drp/network@0.6.1':
-    resolution: {integrity: sha512-ByqDwMKZNierB93LekxgCvPWPzGcEd2Y5Uy1h0zf/SEKqvER25JIkHg+Z3FiwhoEsgJe8OtdGPmOynHfymxJwg==}
+  '@ts-drp/network@0.7.0':
+    resolution: {integrity: sha512-N5Ehz5H7DDzHj+EzvZWaS3egnxHNKADEPbfp6/7a4V6Rhpa247KRthfyTmvAFz+hvPn3CO+E406O2QL6QrnisA==}
 
-  '@ts-drp/node@0.6.1':
-    resolution: {integrity: sha512-nAlEAYooYjcgwqkjZ66MbOtNNDnhO22GeDxQz+YmyxDB3Ha6LrwcQoixtavWhPeJVqNU4Q9BXdA00TH55cIdMg==}
+  '@ts-drp/node@0.7.0':
+    resolution: {integrity: sha512-6Jh6gP4kcdL0mDDlkM4bsLR8dX5DoM+4dselbHwAUHyNeOn/gx5PnjR4CiQxskdyl8ebfj97qljxIqJfpCA3aQ==}
 
-  '@ts-drp/object@0.6.1':
-    resolution: {integrity: sha512-jP+bx7yL1g01zg/nKVc6yw1mkflCvi1UZx/kXKgwWm50lV7diLq7qrjIpjg02C33wDeGeE1ht5gbRX7i+/+JPA==}
+  '@ts-drp/object@0.7.0':
+    resolution: {integrity: sha512-NkrIZIKh40ZBmgLx5qEYDuVACoOSTszVCAUMYS/Dgclht0EvXQU2Rzib0hGBCoPVh4gS+wFFatHThd2qS7ENfg==}
 
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
@@ -4183,16 +4183,16 @@ snapshots:
       '@thi.ng/api': 8.11.18
       '@thi.ng/errors': 2.5.24
 
-  '@ts-drp/blueprints@0.6.1':
+  '@ts-drp/blueprints@0.7.0':
     dependencies:
       '@thi.ng/random': 4.1.9
 
-  '@ts-drp/logger@0.6.1':
+  '@ts-drp/logger@0.7.0':
     dependencies:
       loglevel: 1.9.2
       loglevel-plugin-prefix: 0.8.4
 
-  '@ts-drp/network@0.6.1(react-native@0.77.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(react@18.3.1))':
+  '@ts-drp/network@0.7.0(react-native@0.77.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(react@18.3.1))':
     dependencies:
       '@bufbuild/protobuf': 2.2.3
       '@chainsafe/libp2p-gossipsub': 14.1.0
@@ -4211,7 +4211,8 @@ snapshots:
       '@libp2p/websockets': 9.1.2
       '@libp2p/webtransport': 5.0.22
       '@multiformats/multiaddr': 12.3.4
-      '@ts-drp/logger': 0.6.1
+      '@multiformats/multiaddr-matcher': 1.6.0
+      '@ts-drp/logger': 0.7.0
       it-length-prefixed: 9.1.1
       it-map: 3.1.1
       it-pipe: 3.0.1
@@ -4223,7 +4224,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@ts-drp/node@0.6.1(react-native@0.77.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(react@18.3.1))':
+  '@ts-drp/node@0.7.0(react-native@0.77.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(react@18.3.1))':
     dependencies:
       '@chainsafe/bls': 8.1.0
       '@chainsafe/bls-keygen': 0.4.0
@@ -4233,10 +4234,10 @@ snapshots:
       '@grpc/reflection': 1.0.4(@grpc/grpc-js@1.12.5)
       '@libp2p/crypto': 5.0.9
       '@libp2p/interface': 2.4.0
-      '@ts-drp/blueprints': 0.6.1
-      '@ts-drp/logger': 0.6.1
-      '@ts-drp/network': 0.6.1(react-native@0.77.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(react@18.3.1))
-      '@ts-drp/object': 0.6.1
+      '@ts-drp/blueprints': 0.7.0
+      '@ts-drp/logger': 0.7.0
+      '@ts-drp/network': 0.7.0(react-native@0.77.0(@babel/core@7.26.7)(@babel/preset-env@7.26.7(@babel/core@7.26.7))(react@18.3.1))
+      '@ts-drp/object': 0.7.0
       commander: 13.1.0
       dotenv: 16.4.7
       uint8arrays: 5.1.0
@@ -4247,10 +4248,10 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@ts-drp/object@0.6.1':
+  '@ts-drp/object@0.7.0':
     dependencies:
       '@chainsafe/bls': 8.1.0
-      '@ts-drp/logger': 0.6.1
+      '@ts-drp/logger': 0.7.0
       es-toolkit: 1.30.1
       fast-deep-equal: 3.1.3
       fast-equals: 5.2.2

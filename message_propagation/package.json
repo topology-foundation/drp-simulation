@@ -10,8 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@ts-drp/network": "^0.6.1",
-    "@ts-drp/node": "^0.6.1",
+    "@ts-drp/network": "^0.7.0",
+    "@ts-drp/node": "^0.7.0",
     "commander": "^13.1.0"
   }
 }
