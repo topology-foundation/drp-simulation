@@ -1,6 +1,8 @@
 .env
 node_modules/
-shadow.data/
-shadow.yaml
+*.data*/
+shadow*.yaml
 *.gml
 *.log
+.stfolder/
+__pycache__/

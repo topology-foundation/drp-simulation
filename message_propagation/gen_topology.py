@@ -17,19 +17,29 @@ assert len(REGIONS) == 8
 assert len(DEFAULT_BUILTIN_RELIABILITIES) == 5
 
 
-def node_info(bootstraps: int, node_id: int, same_region=False, all_reliable=False):
+def node_info(
+    bootstraps: int, node_id: int, same_region=False, all_reliable=False, other_region=0
+):
     """Function to determine the attributes of a node"""
+    # add 2 to make the first bt in europe
     if node_id < bootstraps:
         return (
             f"bootstrap{node_id + 1}",
-            REGIONS[node_id % 8] if not same_region else REGIONS[2],
+            REGIONS[(node_id + 2) % 8] if not same_region else REGIONS[2],
             "reliable",
             DEFAULT_BUILTIN_RELIABILITIES["reliable"],
-            f"11.{node_id % 8}.0.{node_id // 8}",
+            f"11.{(node_id + 2) % 8}.0.{(node_id + 2) // 8}",
         )
+
+    # REGIONS[2] = "europe"
+    # REGIONS[0] = "australia"
     return (
         f"node{node_id - bootstraps + 1}",
-        REGIONS[(node_id - bootstraps) % 8] if not same_region else REGIONS[2],
+        (
+            REGIONS[(node_id - bootstraps) % 8]
+            if not same_region
+            else REGIONS[0] if (node_id - bootstraps) < other_region else REGIONS[2]
+        ),
         name := (
             RELIABILITIES[(node_id - bootstraps) % 5]
             if not all_reliable
@@ -41,25 +51,27 @@ def node_info(bootstraps: int, node_id: int, same_region=False, all_reliable=Fal
 
 
 def generate_topology(
-    bootstraps: int, nodes: int, same_region=False, all_reliable=False
+    bootstraps: int, nodes: int, same_region=False, all_reliable=False, other_region=0
 ) -> list[str]:
     """Function to create the network topology"""
     G = nx.DiGraph()
     ips = []
+    labels = []
 
     # start with bootstraps, all are reliable
     for i in range(bootstraps + nodes):
         node_name, region, rel_name, reliability, ip_addr = node_info(
-            bootstraps, i, same_region, all_reliable
+            bootstraps, i, same_region, all_reliable, other_region
         )
         ips.append(ip_addr)
         G.add_node(i, label=f"{node_name} ({region}-{rel_name})")
+        labels.append(f"{node_name} ({region}-{rel_name})")
         G.nodes[i]["hostbandwidthup"] = reliability["bandwidth_up"]
         G.nodes[i]["hostbandwidthdown"] = reliability["bandwidth_down"]
 
         for j in range(bootstraps + nodes):
             _, region_to, rel_to_name, reliability_to, _ = node_info(
-                bootstraps, j, same_region, all_reliable
+                bootstraps, j, same_region, all_reliable, other_region
             )
 
             G.add_edge(i, j)
@@ -89,6 +101,10 @@ def generate_topology(
 
     modified_content = gml_content.replace("hostbandwidth", "host_bandwidth_")
     modified_content = modified_content.replace("packetloss", "packet_loss")
+
+    # node labels were put in the .gml file as numbers, replace them with the actual labels
+    for i in range(bootstraps + nodes):
+        modified_content = modified_content.replace(f'"{i}"', f'"{labels[i]}"')
 
     with open(gml_file, "w", encoding="utf-8") as file:
         file.write(modified_content)
